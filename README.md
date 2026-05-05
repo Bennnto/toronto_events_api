@@ -1,7 +1,9 @@
 ![GitHub Created At](https://img.shields.io/github/created-at/bennnto/toronto_events_api?style=flat&logoColor=violet&logoSize=auto)
 
 ## Toronto Event API 
+<details>
 <summmary>Table of Contents</summmary>
+</details>
   <ul>
     <li><a href=#About-the-project>About The project</li>
       <ul>
