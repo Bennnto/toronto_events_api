@@ -127,20 +127,41 @@
     subgenre = models.CharField(max_length=255, blank=True)
 ```
 
-<h4>API Base URL and Endpoints</h4>
+<h4 id=api>API Base URL and Endpoints</h4>
 <ul>
   <li>Base URL</li>
-    - API Base URL : api.yyz.codes
+    - API Base URL
+      <ul>
+        <li>
+          <mark>api.yyz.codes/</mark>
+        </li>
+      </ul> 
   <li>Event Endpoints</li>
     - List all events<br>
-      - api.yyz.codes/api/v1/event/events_list/<br>
+      <ul>
+        <li>
+          <mark>api.yyz.codes/api/v1/event/events_list/</mark>
+        </li>
+      </ul>
     - Event and Detail by given ID<br>
-      - api.yyz.codes/api/v1/event/{id}/events_detail/<br>
+      <ul>
+        <li>
+          <mark>api.yyz.codes/api/v1/event/{id}/events_detail/</mark>
+        </li>
+      </ul>
   <li>Health Endpoints</li>
     - Health Endpoint (API live)<br>
-      - api.yyz.codes/api/v1/healthz<br>
+      <ul>
+        <li>
+          <mark>api.yyz.codes/api/v1/healthz</mark>
+        </li>
+      </ul>
     - Ready Endpoint (cache and DB)<br>
-      - api.yyz.codes/api/v1/readyz<br>
+      <ul>
+        <li>
+          <mark>api.yyz.codes/api/v1/readyz</mark>
+        </li>
+      </ul>
 </ul>
 
 
