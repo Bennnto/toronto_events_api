@@ -1,31 +1,26 @@
 ![GitHub Created At](https://img.shields.io/github/created-at/bennnto/toronto_events_api?style=flat&logoColor=violet&logoSize=auto)
-
 ## Toronto Event API 
+
 <details>
-<summmary>Table of Contents</summmary>
+<summary>Table of Contents</summary>
+
+  - [About The Project](#about-the-project)
+    - [Tech Stack](#technology-stack)
+  - [Features](#feature)
+  - [Data Models](#data-model)
+  - [API](#api)
+    - [Base URL](#base-url)
+    - [Event Endpoints](#events-check)
+    - [Health Endpoints](#health-check)
+  - [Syncing Data](#syncing)
+    - [Ticket Master](#tkmaster)
+    - [Jsonld](#jsonld)
+  - [Rate Limit and Authentication](#ratelimit)
+  - [Documentation](#documentation)
+  - [Licenses](#license)
+
 </details>
-  <ul>
-    <li><a href=#About-the-project>About The project</li>
-      <ul>
-        <li><a href=#Technology-stack>Tech Stack</a></li>
-      </ul>
-    <li><a href=#Feature>Features</a></li>
-    <li><a href=#Data-model>Data Models</a></li>
-    <li><a href=#API>API</a></li>
-      <ul>
-        <li><a href=#Base-url>Base URL</a></li>
-        <li><a href=#Events-check>Event Endpoints</li>
-        <li><a href=#Health-check>Health Endpoints</li>
-      </ul>
-    <li><a href=#Syncing>Syncing Data</li>
-      <ul>
-        <li><a href=#Tkmaster>Ticket Master</a></li>
-        <li><a href=#Jsonld>Jsonld</a></li>
-      </ul>
-    <li><a href=#ratelimit>Rate Limit and Authentication</a></li>
-    <li><a href=#Documentation>Documentations</a></li>
-    <li><a href=#license>Licenses</a></li>
-  </ul>
+
 
   <h4 id=About-the-project>About the project</h4>
         A Django REST API has been developed to aggregate Toronto events and festivals from the Ticketmaster Discovery API and JSON‑LD<br>
