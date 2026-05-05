@@ -136,7 +136,7 @@
           <mark>api.yyz.codes/</mark>
         </li>
       </ul> 
-  <li>Event Endpoints</li>
+  <li id=events-check>Event Endpoints</li>
     - List all events<br>
       <ul>
         <li>
@@ -149,7 +149,7 @@
           <mark>api.yyz.codes/api/v1/event/{id}/events_detail/</mark>
         </li>
       </ul>
-  <li>Health Endpoints</li>
+  <li id=health-check>Health Endpoints</li>
     - Health Endpoint (API live)<br>
       <ul>
         <li>
@@ -164,5 +164,6 @@
       </ul>
 </ul>
 
-
+<h4 id=syncing>Syncing Data</h4>
+<
     
