@@ -1,5 +1,5 @@
 ![GitHub Created At](https://img.shields.io/github/created-at/bennnto/toronto_events_api?style=flat&logoColor=violet&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/django-6.0.4-darkgreen?style=plastic&logo=django&logoColor=greeen&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/django-6.0.4-darkgreen?style=flat&logo=django&logoColor=greeen&logoSize=auto)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bennnto/toronto_events_api)
 
 ## Toronto Event API 
