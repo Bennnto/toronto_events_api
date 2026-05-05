@@ -1,6 +1,12 @@
+![Toronto](https://img.shields.io/badge/Toronto-Events_API-e8c547?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPCEtLSBTa3kgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzFhMWEyZSIvPgoKICA8IS0tIENOIFRvd2VyIHNpbGhvdWV0dGUgLS0+CiAgPCEtLSBCYXNlIHBsYXRmb3JtIC0tPgogIDxyZWN0IHg9IjMwIiB5PSI3MiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjZThjNTQ3Ii8+CiAgPCEtLSBMb3dlciB0b3dlciBib2R5IC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMzgsNzIgNjIsNzIgNTYsMzggNDQsMzgiIGZpbGw9IiNlOGM1NDciLz4KICA8IS0tIFVwcGVyIHNoYWZ0IC0tPgogIDxyZWN0IHg9IjQ2IiB5PSIxOCIgd2lkdGg9IjgiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZThjNTQ3Ii8+CiAgPCEtLSBQb2Qvb2JzZXJ2YXRpb24gZGVjayAtLT4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSIzOCIgcng9IjEwIiByeT0iNCIgZmlsbD0iI2Yw
 ![GitHub Created At](https://img.shields.io/github/created-at/bennnto/toronto_events_api?style=flat&logoColor=violet&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/django-6.0.4-darkgreen?style=flat&logo=django&logoColor=greeen&logoSize=auto)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bennnto/toronto_events_api)
+![Static Badge](https://img.shields.io/badge/python3-blue?style=flat&logo=python&logoColor=yellow)
+![Static Badge](https://img.shields.io/badge/django-6.0.4-darkgreen?style=flat&logo=django&logoColor=greeen&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/gunicorn-wsgi-teal?style=flat&logo=gunicorn)
+![Static Badge](https://img.shields.io/badge/PostgreSQL-db-lightblue?style=flat&logo=postgresql&logoColor=lightblue)
+
+
 
 ## Toronto Event API 
 
