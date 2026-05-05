@@ -6,7 +6,7 @@
 ![Static Badge](https://img.shields.io/badge/gunicorn-wsgi-teal?style=flat&logo=gunicorn)
 ![Static Badge](https://img.shields.io/badge/redis-gray?logo=redis)
 ![Static Badge](https://img.shields.io/badge/Sentry-magenta?logo=sentry)
-![Static Badge](https://img.shields.io/badge/PostgreSQL-db-lightblue?style=flat&logo=postgresql&logoColor=lightblue)
+![Static Badge](https://img.shields.io/badge/PostgreSQL-db-lightblue?style=flat&logo=postgresql&logoColor=lightblue)<br>
 **This project : Contains information licensed under the Open Government Licence – Toronto.**
 
 
