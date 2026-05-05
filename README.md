@@ -38,7 +38,7 @@
       event data scraped from third‑party websites—into a unified data model comprising Event, Venue, Category, and Offer entities which<br>
       are accessible through a public, read‑only HTTP interface designed for client applications, dashboards, and downstream services.<br>
       The project prioritizes reliable robust data normalization, along with explicit modelling of relationships between events, their locations,<br>
-      and their commercial offers. Additionally it also incoporates production-oriented health checks for both livenessand readiness,<br>
+      and their commercial offers. Additionally it also incoporates production-oriented health checks for both liveness and readiness,<br>
       the database are responsive and the API is prepared to serve requests<br>
 
 <details>
@@ -126,5 +126,22 @@
     genre = models.CharField(max_length=255, blank=True)
     subgenre = models.CharField(max_length=255, blank=True)
 ```
+
+<h4>API Base URL and Endpoints</h4>
+<ul>
+  <li>Base URL</li>
+    - API Base URL : api.yyz.codes
+  <li>Event Endpoints</li>
+    - List all events<br>
+      - api.yyz.codes/api/v1/event/events_list/<br>
+    - Event and Detail by given ID<br>
+      - api.yyz.codes/api/v1/event/{id}/events_detail/<br>
+  <li>Health Endpoints</li>
+    - Health Endpoint (API live)<br>
+      - api.yyz.codes/api/v1/healthz<br>
+    - Ready Endpoint (cache and DB)<br>
+      - api.yyz.codes/api/v1/readyz<br>
+</ul>
+
 
     
