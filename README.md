@@ -39,4 +39,89 @@
       and their commercial offers. Additionally it also incoporates production-oriented health checks for both livenessand readiness,<br>
       the database are responsive and the API is prepared to serve requests<br>
 
-  <h5 id=Technology-stack>Tech Stack</h5>
+<details>
+  <summary id=Technology-stack>Tech Stack</summary>
+    <ul>
+    <li>Language and Runtime</li>
+      - Python 3.12 
+    <li>Web Framework</li>
+      - Django (Core Web framework)<br>
+      - Django Rest Framework (API layer)<br>
+      - Rest Framework Simplejwt (Authentication)<br>
+    <li>DataBase</li>
+      - PostgreSQL<br<
+    <li>Task Queue and Scheduling</li>T
+      - Celery (Async task execution)<br>
+      - Redis (Celery message broker and result backend)<br>
+      - Django_Celery_beat (Periodic task scheduling)<br>
+      - Django_Celery_result (Task result storage)<br>
+    <li<>API Documentation</li>
+      - Drf spectacular<br>
+      - Scalar<br>
+    <li>Utilities</li>
+      - Django_filter<br>
+      - Django_cors-headers<br>
+      - Gunicorn (Wsgi)<br>
+      - Python_dotenv<br>
+    <li>Monitoring</li>
+      - Sentry SDK<br>
+    </ul>
+  
+</details>
+
+<h4 id=feature>Features</h4>
+<ul>
+  <li>Ingest data from reliable source Ticketmaster, JSON-LD Toronto Event</li>
+  <li>Normalized data model and relation</li>
+  <li>Read only public rest API</li>
+  <li>Endpoints health check for liveness and DB / cache readiness</li>
+  <li>Schema / Documentation by "drf-spectacular" and UI "Scalar UI"</li>
+  <li>Rate limit for anonymouse user and authenticated clients</li>
+</ul>
+
+<h4 id=data-model>Data Model</h4>
+  <h5>Event Model</h5>
+
+```Python
+    ext_id = models.CharField(max_length=255)
+    event_name = models.CharField(max_length=500)
+    description = models.TextField(blank=True)
+    event_url = models.URLField(max_length=1000, null=True, blank=True)
+    sale_status = models.CharField(max_length=255, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    sale_start_date = models.DateTimeField(blank=True, null=True)
+    sale_end_date = models.DateTimeField(blank=True, null=True)
+    event_start_date = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+```
+  <h5>Venue Model</h5>
+
+```Python
+    venue_name = models.CharField(max_length=255)
+    venue_type = models.CharField(max_length=255)
+    seat_map = models.URLField(max_length=1000, blank=True)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
+```
+  <h5>Offer Model</h5>
+
+```Python
+    event = models.ForeignKey('Event', related_name='offers', on_delete=models.CASCADE, null=True)
+    offer_type = models.CharField(max_length=255, null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    currency = models.CharField(max_length=10, null=True, blank=True)
+    sale_url = models.URLField(max_length=1000, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+```
+  <h5>Category Model</h5>
+
+```Python
+    segment = models.CharField(max_length=255, blank=True)
+    genre = models.CharField(max_length=255, blank=True)
+    subgenre = models.CharField(max_length=255, blank=True)
+```
+    
