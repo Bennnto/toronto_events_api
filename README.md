@@ -5,8 +5,9 @@
 ![Static Badge](https://img.shields.io/badge/django-6.0.4-darkgreen?style=flat&logo=django&logoColor=greeen&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/gunicorn-wsgi-teal?style=flat&logo=gunicorn)
 ![Static Badge](https://img.shields.io/badge/redis-gray?logo=redis)
+![Static Badge](https://img.shields.io/badge/Sentry-magenta?logo=sentry)
 ![Static Badge](https://img.shields.io/badge/PostgreSQL-db-lightblue?style=flat&logo=postgresql&logoColor=lightblue)
-
+this project : Contains information licensed under the Open Government Licence – Toronto.
 
 
 ## Toronto Event API 
@@ -125,4 +126,5 @@
     genre = models.CharField(max_length=255, blank=True)
     subgenre = models.CharField(max_length=255, blank=True)
 ```
+
     
