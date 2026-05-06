@@ -1,9 +1,40 @@
+# ── Python ────────────────────────────────────────
 __pycache__/
-*.pyc
 *.py[cod]
-.env
+*.pyc
 *.pyo
-.DS\_Store
+*.pyd
+*.egg-info/
+dist/
+build/
+# ── Django ────────────────────────────────────────
+db.sqlite3
+*.db
+media/
+staticfiles/          # ← MISSING: collectstatic output, shouldn't be committed
+# ── Environment & Secrets ─────────────────────────
+.env
+.env.*                # ← MISSING: catches .env.production, .env.staging, etc.
+# ── Celery ────────────────────────────────────────
+celerybeat-schedule   # ← MISSING: these 3 files exist in your repo right now
+celerybeat-schedule-shm
+celerybeat-schedule-wal
+# ── Logs ──────────────────────────────────────────
+*.log                 # ← MISSING
+# ── Testing & Coverage ────────────────────────────
+.coverage             # ← MISSING
+htmlcov/              # ← MISSING
+.pytest_cache/        # ← MISSING
+# ── Generated schema ──────────────────────────────
+schema.yml            # ← MISSING: drf-spectacular output
+# ── Virtual environments ──────────────────────────
+.venv
+venv
+# ── IDEs ──────────────────────────────────────────
+.vscode/
+.idea/                # ← MISSING: JetBrains
+# ── macOS ─────────────────────────────────────────
+.DS_Store
 .AppleDouble
 .LSOverride
 .Spotlight-V100
@@ -11,12 +42,6 @@ __pycache__/
 .fseventsd
 .DocumentRevisions-V100
 .TemporaryItems
-db.sqlite3
-\*.db
-media/
-staticfiles/
-.vscode/
-.venv
-venv
+# ── Project-specific ignores ──────────────────────
 toronto-opendata-festivalsandevents-jsonld-proxy/
 toronto_docs/
