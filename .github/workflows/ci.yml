@@ -10,16 +10,27 @@ env:
   PYTHON_VERSION: '3.12'
   SECRET_KEY: ${{ secrets.SECRET_KEY || 'django-insecure-ci-test-key-not-for-production-use' }}
   DJANGO_SETTINGS_MODULE: events.settings
+  DEBUG: 'False'
+  ENVIRONMENT: test
+  SENTRY_DSN: ''
+  # Database
   DB_NAME: events_db_test
   DB_USER: postgres
   DB_PASSWORD: postgres
   DB_HOST: localhost
   DB_PORT: 5432
+  # Redis
+  REDIS_URL: redis://localhost:6379/0
+  CELERY_BROKER_URL: redis://localhost:6379/0
+  CELERY_RESULT_BACKEND: redis://localhost:6379/0
+  # Ticketmaster (not used in tests but referenced at import time)
+  TK_MT_URL: https://app.ticketmaster.com/discovery/v2/events.json
+  TK_MT_API: ci-placeholder-key
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres:15
@@ -35,29 +46,42 @@ jobs:
         ports:
           - 5432:5432
 
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: ${{ env.PYTHON_VERSION }}
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install psycopg2-binary
-    
-    - name: Run Django checks
+
+    - name: Run Django system checks
       run: python manage.py check
-    
+
+    - name: Collect static files
+      run: python manage.py collectstatic --noinput
+
     - name: Run migrations
       run: python manage.py migrate
-    
+
     - name: Run tests
       run: python manage.py test event_app -v 2
-    
+
     - name: Upload coverage
       uses: codecov/codecov-action@v3
       with:
@@ -65,53 +89,52 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: ${{ env.PYTHON_VERSION }}
-    
+
     - name: Install lint tools
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 black isort pylint
-    
+        pip install flake8 black isort
+
     - name: Lint with flake8
-      run: |
-        flake8 event_app events scalar --max-line-length=120 --exclude=migrations,__pycache__
+      run: flake8 event_app events scalar --max-line-length=120 --exclude=migrations,__pycache__
       continue-on-error: true
-    
+
     - name: Check formatting with black
       run: black --check event_app events scalar --line-length=120
       continue-on-error: true
-    
+
     - name: Check import sorting with isort
       run: isort --check-only event_app events scalar
       continue-on-error: true
 
   security:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: ${{ env.PYTHON_VERSION }}
-    
+
     - name: Install security tools
       run: |
         python -m pip install --upgrade pip
         pip install bandit safety
-    
+
     - name: Security check with bandit
       run: bandit -r event_app events scalar -ll
       continue-on-error: true
-    
+
     - name: Check dependencies with safety
       run: pip install -r requirements.txt && safety check
       continue-on-error: true

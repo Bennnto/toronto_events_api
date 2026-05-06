@@ -191,18 +191,18 @@ class EventListTests(TestCase):
 
     def test_list_unauthenticated_returns_200(self):
         """IsAuthenticatedOrReadOnly allows unauthenticated GET."""
-        r = self.client.get("/api/v1/event/events_list/")
+        r = self.client.get("/api/v1/events/")
         self.assertEqual(r.status_code, 200)
 
     def test_list_authenticated_returns_200(self):
         self._auth()
-        r = self.client.get("/api/v1/event/events_list/")
+        r = self.client.get("/api/v1/events/")
         self.assertEqual(r.status_code, 200)
 
     def test_list_returns_event_fields(self):
         self._auth()
-        r = self.client.get("/api/v1/event/events_list/")
-        results = r.json()
+        r = self.client.get("/api/v1/events/")
+        results = r.json()["results"]
         self.assertGreater(len(results), 0)
         event = results[0]
         self.assertIn("event_name", event)
@@ -212,7 +212,7 @@ class EventListTests(TestCase):
 
     def test_list_filter_by_sale_status(self):
         self._auth()
-        r = self.client.get("/api/v1/event/events_list/?sale_status=ON_SALE")
+        r = self.client.get("/api/v1/events/?sale_status=ON_SALE")
         self.assertEqual(r.status_code, 200)
 
     def test_list_pagination_limit(self):
@@ -220,9 +220,9 @@ class EventListTests(TestCase):
         # Create extra events
         for i in range(5):
             make_event(ext_id=f"TK-EXTRA-{i}", event_name=f"Extra Event {i}")
-        r = self.client.get("/api/v1/event/events_list/?limit=2&offset=0")
+        r = self.client.get("/api/v1/events/?limit=2&offset=0")
         self.assertEqual(r.status_code, 200)
-        self.assertLessEqual(len(r.json()), 2)
+        self.assertLessEqual(len(r.json()["results"]), 2)
 
 
 # ─── Event detail ──────────────────────────────────────────────────────────────
@@ -247,32 +247,32 @@ class EventDetailTests(TestCase):
 
     def test_detail_unauthenticated_returns_200(self):
         """IsAuthenticatedOrReadOnly allows unauthenticated GET."""
-        r = self.client.get(f"/api/v1/event/{self.event.pk}/events_detail/")
+        r = self.client.get(f"/api/v1/events/{self.event.pk}/")
         self.assertEqual(r.status_code, 200)
 
     def test_detail_authenticated_returns_200(self):
         self._auth()
-        r = self.client.get(f"/api/v1/event/{self.event.pk}/events_detail/")
+        r = self.client.get(f"/api/v1/events/{self.event.pk}/")
         self.assertEqual(r.status_code, 200)
 
     def test_detail_correct_event_returned(self):
         self._auth()
-        r = self.client.get(f"/api/v1/event/{self.event.pk}/events_detail/")
+        r = self.client.get(f"/api/v1/events/{self.event.pk}/")
         self.assertEqual(r.json()["event_name"], "Test Concert")
 
     def test_detail_invalid_pk_returns_404(self):
         self._auth()
-        r = self.client.get("/api/v1/event/99999/events_detail/")
+        r = self.client.get("/api/v1/events/99999/")
         self.assertEqual(r.status_code, 404)
 
     def test_detail_has_nested_venue(self):
         self._auth()
-        r = self.client.get(f"/api/v1/event/{self.event.pk}/events_detail/")
+        r = self.client.get(f"/api/v1/events/{self.event.pk}/")
         self.assertIn("venue_name", r.json()["venue"])
 
     def test_detail_has_nested_category(self):
         self._auth()
-        r = self.client.get(f"/api/v1/event/{self.event.pk}/events_detail/")
+        r = self.client.get(f"/api/v1/events/{self.event.pk}/")
         self.assertIn("segment", r.json()["category"])
 
 
@@ -298,14 +298,14 @@ class EventUpdateTests(TestCase):
 
     def test_patch_unauthenticated_returns_403(self):
         r = self.client.patch(
-            f"/api/v1/event/{self.event.pk}/par_update/", {"event_name": "New"}
+            f"/api/v1/events/{self.event.pk}/", {"event_name": "New"}
         )
         self.assertIn(r.status_code, [401, 403])
 
     def test_patch_authenticated_updates_field(self):
         self._auth()
         r = self.client.patch(
-            f"/api/v1/event/{self.event.pk}/par_update/",
+            f"/api/v1/events/{self.event.pk}/",
             {"event_name": "Updated Concert"},
             format="json",
         )
@@ -315,7 +315,7 @@ class EventUpdateTests(TestCase):
     def test_patch_invalid_pk_returns_404(self):
         self._auth()
         r = self.client.patch(
-            "/api/v1/event/99999/par_update/", {"event_name": "X"}, format="json"
+            "/api/v1/events/99999/", {"event_name": "X"}, format="json"
         )
         self.assertEqual(r.status_code, 404)
 
@@ -341,17 +341,17 @@ class EventDeleteTests(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {r.json()['access']}")
 
     def test_delete_unauthenticated_returns_403(self):
-        r = self.client.delete(f"/api/v1/event/{self.event.pk}/del_event/")
+        r = self.client.delete(f"/api/v1/events/{self.event.pk}/")
         self.assertIn(r.status_code, [401, 403])
 
     def test_delete_authenticated_removes_event(self):
         self._auth()
         pk = self.event.pk
-        r = self.client.delete(f"/api/v1/event/{pk}/del_event/")
-        self.assertEqual(r.status_code, 200)
+        r = self.client.delete(f"/api/v1/events/{pk}/")
+        self.assertEqual(r.status_code, 204)
         self.assertFalse(Event.objects.filter(pk=pk).exists())
 
     def test_delete_invalid_pk_returns_404(self):
         self._auth()
-        r = self.client.delete("/api/v1/event/99999/del_event/")
+        r = self.client.delete("/api/v1/events/99999/")
         self.assertEqual(r.status_code, 404)
