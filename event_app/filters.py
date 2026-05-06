@@ -5,4 +5,4 @@ from .models import Event
 class EventFilter(django_filters.FilterSet):
     class Meta:
         model = Event
-        fields = ['event_start_date', 'category']
+        fields = ["event_start_date", "category"]

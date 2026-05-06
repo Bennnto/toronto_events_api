@@ -5,50 +5,90 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('segment', models.CharField(max_length=255)),
-                ('genre', models.CharField(max_length=255)),
-                ('subgenre', models.CharField(blank=True, max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("segment", models.CharField(max_length=255)),
+                ("genre", models.CharField(max_length=255)),
+                ("subgenre", models.CharField(blank=True, max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Venue',
+            name="Venue",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('venue_name', models.CharField(max_length=255)),
-                ('venue_type', models.CharField(max_length=255)),
-                ('seat_map', models.URLField(blank=True)),
-                ('address', models.CharField(max_length=255)),
-                ('city', models.CharField(max_length=255)),
-                ('country', models.CharField(max_length=255)),
-                ('latitude', models.DecimalField(blank=True, decimal_places=6, max_digits=9)),
-                ('longitude', models.DecimalField(blank=True, decimal_places=6, max_digits=9)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("venue_name", models.CharField(max_length=255)),
+                ("venue_type", models.CharField(max_length=255)),
+                ("seat_map", models.URLField(blank=True)),
+                ("address", models.CharField(max_length=255)),
+                ("city", models.CharField(max_length=255)),
+                ("country", models.CharField(max_length=255)),
+                (
+                    "latitude",
+                    models.DecimalField(blank=True, decimal_places=6, max_digits=9),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(blank=True, decimal_places=6, max_digits=9),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ext_id', models.CharField(max_length=255)),
-                ('event_name', models.CharField(max_length=255)),
-                ('description', models.TextField(blank=True)),
-                ('event_url', models.URLField(blank=True, null=True)),
-                ('sale_url', models.URLField(blank=True)),
-                ('sale_start_date', models.DateTimeField(blank=True, null=True)),
-                ('sale_end_date', models.DateTimeField(blank=True, null=True)),
-                ('event_start_date', models.DateTimeField(blank=True, null=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='event_app.category')),
-                ('venue', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='event_app.venue')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ext_id", models.CharField(max_length=255)),
+                ("event_name", models.CharField(max_length=255)),
+                ("description", models.TextField(blank=True)),
+                ("event_url", models.URLField(blank=True, null=True)),
+                ("sale_url", models.URLField(blank=True)),
+                ("sale_start_date", models.DateTimeField(blank=True, null=True)),
+                ("sale_end_date", models.DateTimeField(blank=True, null=True)),
+                ("event_start_date", models.DateTimeField(blank=True, null=True)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="event_app.category",
+                    ),
+                ),
+                (
+                    "venue",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="event_app.venue",
+                    ),
+                ),
             ],
         ),
     ]

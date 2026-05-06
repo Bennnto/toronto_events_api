@@ -3,7 +3,6 @@ from typing import Type, List
 from django_filters import FilterSet
 from drf_spectacular.utils import OpenApiParameter
 from django_filters.filters import (
-    CharFilter,
     NumberFilter,
     DateFilter,
     BooleanFilter,
@@ -11,6 +10,8 @@ from django_filters.filters import (
     ModelChoiceFilter,
 )
 from rest_framework.fields import DecimalField
+
+
 def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParameter]:
     """
     Automatically generate OpenAPI parameters from a FilterSet class.
@@ -22,7 +23,6 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
     parameters = []
     for field_name, filter_instance in filter_class().filters.items():
         parameter_type = str  # default type
-        parameter_format = None
         enum = None
         # Determine parameter type based on filter type
         if isinstance(filter_instance, NumberFilter):
@@ -33,21 +33,24 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
             parameter_type = bool
         elif isinstance(filter_instance, DateFilter):
             parameter_type = str
-            parameter_format = "date"
         elif isinstance(filter_instance, ChoiceFilter):
             parameter_type = str
-            if hasattr(filter_instance.field, 'choices'):
+            if hasattr(filter_instance.field, "choices"):
                 enum = [str(choice[0]) for choice in filter_instance.field.choices]
         elif isinstance(filter_instance, ModelChoiceFilter):
             parameter_type = int
             description = "Related object ID"
-            if hasattr(filter_instance, 'field') and hasattr(filter_instance.field, 'queryset'):
+            if hasattr(filter_instance, "field") and hasattr(
+                filter_instance.field, "queryset"
+            ):
                 description = (
                     f"ID of related {filter_instance.field.queryset.model.__name__}"
                 )
                 # Extract IDs from queryset for enum
                 try:
-                    enum = list(filter_instance.field.queryset.values_list('id', flat=True))
+                    enum = list(
+                        filter_instance.field.queryset.values_list("id", flat=True)
+                    )
                 except Exception:
                     enum = None
         # Get lookup expression for description

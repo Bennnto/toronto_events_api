@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('event_app', '0005_alter_event_event_name'),
+        ("event_app", "0005_alter_event_event_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='offer',
-            name='sale_url',
+            model_name="offer",
+            name="sale_url",
             field=models.URLField(blank=True, max_length=500, null=True),
         ),
     ]

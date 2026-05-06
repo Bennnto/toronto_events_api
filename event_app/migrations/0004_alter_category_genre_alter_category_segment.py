@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('event_app', '0003_backfill_created_at'),
+        ("event_app", "0003_backfill_created_at"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='genre',
+            model_name="category",
+            name="genre",
             field=models.CharField(blank=True, max_length=255),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='segment',
+            model_name="category",
+            name="segment",
             field=models.CharField(blank=True, max_length=255),
         ),
     ]

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Venue(models.Model):
     venue_name = models.CharField(max_length=255)
     venue_type = models.CharField(max_length=255)
@@ -9,15 +10,16 @@ class Venue(models.Model):
     country = models.CharField(max_length=255)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
-    
+
     def __str__(self):
         return f"{self.venue_name} - {self.city}"
+
 
 class Category(models.Model):
     segment = models.CharField(max_length=255, blank=True)
     genre = models.CharField(max_length=255, blank=True)
     subgenre = models.CharField(max_length=255, blank=True)
-    
+
     def __str__(self):
         if self.segment is not None:
             return f"{self.segment}"
@@ -25,18 +27,21 @@ class Category(models.Model):
             return f"{self.genre}"
         elif self.genre is None and self.subgenre is not None:
             return f"{self.subgenre}"
-             
+
 
 class Offer(models.Model):
-    event = models.ForeignKey('Event', related_name='offers', on_delete=models.CASCADE, null=True)
+    event = models.ForeignKey(
+        "Event", related_name="offers", on_delete=models.CASCADE, null=True
+    )
     offer_type = models.CharField(max_length=255, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     currency = models.CharField(max_length=10, null=True, blank=True)
     sale_url = models.URLField(max_length=1000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.event}-{self.offer_type} : {self.price}"
+
 
 class Event(models.Model):
     ext_id = models.CharField(max_length=255)
@@ -50,9 +55,6 @@ class Event(models.Model):
     sale_end_date = models.DateTimeField(blank=True, null=True)
     event_start_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    
-    
+
     def __str__(self):
         return f"{self.event_name} - {self.event_start_date}"
-    

@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('event_app', '0007_alter_event_event_url_alter_venue_seat_map'),
+        ("event_app", "0007_alter_event_event_url_alter_venue_seat_map"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='event_url',
+            model_name="event",
+            name="event_url",
             field=models.URLField(blank=True, max_length=1000, null=True),
         ),
         migrations.AlterField(
-            model_name='offer',
-            name='sale_url',
+            model_name="offer",
+            name="sale_url",
             field=models.URLField(blank=True, max_length=1000, null=True),
         ),
         migrations.AlterField(
-            model_name='venue',
-            name='seat_map',
+            model_name="venue",
+            name="seat_map",
             field=models.URLField(blank=True, max_length=1000),
         ),
     ]
