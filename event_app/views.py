@@ -43,7 +43,7 @@ load_dotenv()
         description='Retrieve event by id.',
     ),
 )
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Event.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = EventSerializer
