@@ -26,6 +26,10 @@ from .models import Event
 from .serializers import EventSerializer
 from .filters import EventFilter
 from .forms import Registry_Form, Login_Form
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 @extend_schema_view(
     list=extend_schema(
@@ -155,7 +159,7 @@ def user_register(request):
             send_mail(
                 subject="Toronto Event APIs Account Created Successfully",
                 message=email_message,
-                from_email="vissarut.rod@gmail.com",
+                from_email=os.getenv("EMAIL_HOST_USER"),
                 recipient_list=[user.email],
             )
             messages.success(request, "Check your email for account confirmation")
