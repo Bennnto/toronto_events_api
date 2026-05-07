@@ -40,7 +40,7 @@ The project prioritizes robust data normalization, explicit modelling of relatio
 - 📖 **Interactive documentation** — Auto-generated OpenAPI schema with Scalar UI
 - 🚦 **Rate limiting** — Tiered limits for anonymous and authenticated clients
 - 🔑 **JWT authentication** — Token-based access for higher rate limits
-- 📍 **Geolocation data** — Latitude and longitude on every venue for map-based applications
+- 📍 **Geolocation data** — Latitude and longitude for map-based applications in available data
 
 ## Tech Stack
 
