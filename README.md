@@ -19,7 +19,7 @@
 
   - [About The Project](#about-the-project)
     - [Tech Stack](#technology-stack)
-  - [Features](#feature)
+  - [Features](#features)
   - [Data Models](#data-model)
   - [API](#api)
     - [Base URL](#base-url)
@@ -35,56 +35,54 @@
 </details>
 
 
-  <h4 id=About-the-project>About the project</h4>
-        A Django REST API has been developed to aggregate Toronto events and festivals from the Ticketmaster Discovery API and JSON‑LD<br>
-      event data scraped from third‑party websites—into a unified data model comprising Event, Venue, Category, and Offer entities which<br>
-      are accessible through a public, read‑only HTTP interface designed for client applications, dashboards, and downstream services.<br>
-      The project prioritizes reliable robust data normalization, along with explicit modelling of relationships between events, their locations,<br>
-      and their commercial offers. Additionally it also incoporates production-oriented health checks for both liveness and readiness,<br>
-      the database are responsive and the API is prepared to serve requests<br>
+   #### About The Project  <a id="about-the-project"></a>
+  A Django REST API has been developed to aggregate Toronto events and festivals from the Ticketmaster Discovery API and JSON‑LD<br>
+  event data scraped from third‑party websites—into a unified data model comprising Event, Venue, Category, and Offer entities which<br>
+  are accessible through a public, read‑only HTTP interface designed for client applications, dashboards, and downstream services.<br>
+  The project prioritizes reliable robust data normalization, along with explicit modelling of relationships between events, their locations,<br>
+  and their commercial offers. Additionally it also incoporates production-oriented health checks for both liveness and readiness,<br>
+  the database are responsive and the API is prepared to serve requests<br>
 
-<details>
-  <summary id=Technology-stack>Tech Stack</summary>
-    <ul>
-    <li>Language and Runtime</li>
-      - Python 3.12 
-    <li>Web Framework</li>
-      - Django (Core Web framework)<br>
-      - Django Rest Framework (API layer)<br>
-      - Rest Framework Simplejwt (Authentication)<br>
-    <li>DataBase</li>
-      - PostgreSQL<br<
-    <li>Task Queue and Scheduling</li>T
-      - Celery (Async task execution)<br>
-      - Redis (Celery message broker and result backend)<br>
-      - Django_Celery_beat (Periodic task scheduling)<br>
-      - Django_Celery_result (Task result storage)<br>
-    <li<>API Documentation</li>
-      - Drf spectacular<br>
-      - Scalar<br>
-    <li>Utilities</li>
-      - Django_filter<br>
-      - Django_cors-headers<br>
-      - Gunicorn (Wsgi)<br>
-      - Python_dotenv<br>
-    <li>Monitoring</li>
-      - Sentry SDK<br>
-    </ul>
-  
+<details>  
+<summary id=technology-stack>Tech Stack</summary> 
+
+*   Language and Runtime
+    *   Python 3.12* 
+*   Web Framework
+    *   Django (Core Web framework)
+    *   Django Rest Framework (API layer)
+    *   Rest Framework Simplejwt (Authentication)  
+*   DataBase
+    *   stgreSQLTask Queue and SchedulingT - Celery (Async task execution)
+    *   Redis (Celery message broker and result backend)
+    *   Django\_Celery\_beat (Periodic task scheduling)
+    *   Django\_Celery\_result (Task result storage)
+*   API Documentation
+    *   Drf spectacular
+    *   Scalar UI
+*   Utilities
+    *   django\_filter
+    *   Django\_cors-headers
+    *   Gunicorn (Wsgi)
+    *   Python\_dotenv  
+*   Monitoring
+    *   Sentry SDK
+
 </details>
 
-<h4 id=feature>Features</h4>
-<ul>
-  <li>Ingest data from reliable source Ticketmaster, JSON-LD Toronto Event</li>
-  <li>Normalized data model and relation</li>
-  <li>Read only public rest API</li>
-  <li>Endpoints health check for liveness and DB / cache readiness</li>
-  <li>Schema / Documentation by "drf-spectacular" and UI "Scalar UI"</li>
-  <li>Rate limit for anonymouse user and authenticated clients</li>
-</ul>
 
-<h4 id=data-model>Data Model</h4>
-  <h5>Event Model</h5>
+#### Features <a id="features"></a>
+  *    Ingest data from reliable source Ticketmaster, JSON-LD Toronto Event
+  *    Normalized data model and relation
+  *    Read only public rest API
+  *    Endpoints health check for liveness and DB / cache readiness
+  *    Schema / Documentation by "drf-spectacular" and UI "Scalar UI"
+  *    Rate Limit for anonymouse user and authenticated clients
+
+
+#### Data Model <a id="data-models"></a>
+
+ ##### Event Model 
 
 ```Python
     ext_id = models.CharField(max_length=255)
@@ -99,7 +97,7 @@
     event_start_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 ```
-  <h5>Venue Model</h5>
+  ##### Venue Model
 
 ```Python
     venue_name = models.CharField(max_length=255)
@@ -111,7 +109,7 @@
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
 ```
-  <h5>Offer Model</h5>
+  ##### Offer Model
 
 ```Python
     event = models.ForeignKey('Event', related_name='offers', on_delete=models.CASCADE, null=True)
@@ -121,7 +119,7 @@
     sale_url = models.URLField(max_length=1000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 ```
-  <h5>Category Model</h5>
+  ##### Category Model
 
 ```Python
     segment = models.CharField(max_length=255, blank=True)
@@ -129,28 +127,14 @@
     subgenre = models.CharField(max_length=255, blank=True)
 ```
 
-<h4 id=api>API Base URL and Public Endpoints</h4>
-<ul>
-  <li id=base-url>Base URL</li>
-    - API Base URL
-      <ul>
-        <li>
-          <mark>api.yyz.codes/</mark>
-        </li>
-      </ul> 
-  <li id=events-check>Event Endpoints</li>
-    - List all events<br>
-      <ul>
-        <li>
-          <mark> GET /api/v1/events/</mark>
-        </li>
-      </ul>
-    - Event and Detail by given ID<br>
-      <ul>
-        <li>
-          <mark> GET /api/v1/events/{id}/</mark>
-        </li>
-      </ul>
+#### Base API and Public Endpoints <a id="api"></a>
+  *    Base URL <a id="base-url"></a>
+        - API Base URL : `api.yyz.codes/`
+    
+  *    Event Endpoints  <a id="event-check"></a>
+        -   List all events : `GET /api/v1/event/`
+        -  Event and Detail by given ID : `GET /api/v1/event/{id}/`
+    
   <li id=health-check>Health Endpoints</li>
     - Health Endpoint (API live)<br>
       <ul>
@@ -183,8 +167,8 @@ for all consumers.<br>
   <br>
   <strong>Rate Limit</strong> <br>
   To prevent abuse and accidental overuse, each client is limited by user type <br>
-    - Anonymous User 10 request / day <br>
-    - Authenticated User 500 request / day <br>
+    - Anonymous User 10 request / day per IP Address<br>
+    - Authenticated User 500 request / day per User <br>
   <br>
   <strong>Authentication</strong> <br>
     1. Register an account <br>
