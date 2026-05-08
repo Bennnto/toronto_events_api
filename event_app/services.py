@@ -76,7 +76,7 @@ def parse_raw_data():
         for event in event_data:
             id = event.get("id", "")
             name = event.get("name", "Unknown")
-            description = event.get("descriptions", "")
+            description = event.get("description", "")
             event_url = event.get("url", "")
             outlets = event.get("outlets") or []
             sale_url = outlets[0].get("url", "") if outlets else ""

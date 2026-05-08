@@ -285,7 +285,7 @@ class EventUpdateTests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(username="updateuser", password="pass")
+        self.user = User.objects.create_superuser(username="updateuser", password="pass")
         self.event = make_event()
 
     def _auth(self):
@@ -298,14 +298,14 @@ class EventUpdateTests(TestCase):
 
     def test_patch_unauthenticated_returns_403(self):
         r = self.client.patch(
-            f"/api/v1/events/{self.event.pk}/", {"event_name": "New"}
+            f"/api/v1/admin/events/{self.event.pk}/", {"event_name": "New"}
         )
         self.assertIn(r.status_code, [401, 403])
 
     def test_patch_authenticated_updates_field(self):
         self._auth()
         r = self.client.patch(
-            f"/api/v1/events/{self.event.pk}/",
+            f"/api/v1/admin/events/{self.event.pk}/",
             {"event_name": "Updated Concert"},
             format="json",
         )
@@ -315,7 +315,7 @@ class EventUpdateTests(TestCase):
     def test_patch_invalid_pk_returns_404(self):
         self._auth()
         r = self.client.patch(
-            "/api/v1/events/99999/", {"event_name": "X"}, format="json"
+            "/api/v1/admin/events/99999/", {"event_name": "X"}, format="json"
         )
         self.assertEqual(r.status_code, 404)
 
@@ -329,7 +329,7 @@ class EventDeleteTests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(username="deleteuser", password="pass")
+        self.user = User.objects.create_superuser(username="deleteuser", password="pass")
         self.event = make_event()
 
     def _auth(self):
@@ -341,17 +341,17 @@ class EventDeleteTests(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {r.json()['access']}")
 
     def test_delete_unauthenticated_returns_403(self):
-        r = self.client.delete(f"/api/v1/events/{self.event.pk}/")
+        r = self.client.delete(f"/api/v1/admin/events/{self.event.pk}/")
         self.assertIn(r.status_code, [401, 403])
 
     def test_delete_authenticated_removes_event(self):
         self._auth()
         pk = self.event.pk
-        r = self.client.delete(f"/api/v1/events/{pk}/")
+        r = self.client.delete(f"/api/v1/admin/events/{pk}/")
         self.assertEqual(r.status_code, 204)
         self.assertFalse(Event.objects.filter(pk=pk).exists())
 
     def test_delete_invalid_pk_returns_404(self):
         self._auth()
-        r = self.client.delete("/api/v1/events/99999/")
+        r = self.client.delete("/api/v1/admin/events/99999/")
         self.assertEqual(r.status_code, 404)

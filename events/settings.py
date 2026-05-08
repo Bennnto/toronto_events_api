@@ -31,8 +31,11 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
+import sys
+TESTING = "test" in sys.argv
+
 # Dev-safe security flags — set these to True only in production behind HTTPS
-if DEBUG:
+if DEBUG or TESTING:
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False

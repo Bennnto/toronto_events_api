@@ -21,12 +21,7 @@ class Category(models.Model):
     subgenre = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        if self.segment is not None:
-            return f"{self.segment}"
-        elif self.segment is None and self.genre is not None:
-            return f"{self.genre}"
-        elif self.genre is None and self.subgenre is not None:
-            return f"{self.subgenre}"
+        return self.segment or self.genre or self.subgenre or "Uncategorized"
 
 
 class Offer(models.Model):
