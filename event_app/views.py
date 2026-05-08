@@ -3,9 +3,11 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAdminUser
 from rest_framework.decorators import api_view, throttle_classes, permission_classes
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
 from drf_spectacular.utils import extend_schema, OpenApiParameter, extend_schema_view
 from django.http import JsonResponse
+from django_filters.rest_framework import DjangoFilterBackend
 from django.db import connections
 from django.core.cache import caches
 from django.contrib.auth import login, authenticate, logout
@@ -50,6 +52,8 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = EventFilter
     throttle_classes = [BaseThrottle, AuthThrottle]
     pagination_class = LimitOffsetPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    search_fields = ['event_name', 'category__category__name', 'venue__venue_name']
 
     def list(self, request, *args, **kwargs):
         queryset = self.filterset_class(request.GET, queryset=self.get_queryset())
@@ -96,7 +100,8 @@ class AdminEventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     pagination_class = LimitOffsetPagination
     throttle_classes = [AdminThrottle]
-
+    filter_backends= [DjangoFilterBackend, SearchFilter]
+    search_fields = ['event_name', 'category__category__name', 'venue__venue_name']
 
 
 @api_view(['GET'])
