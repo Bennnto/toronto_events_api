@@ -8,7 +8,7 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, extend_schema
 from django.http import JsonResponse
 from django.db import connections
 from django.core.cache import caches
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required

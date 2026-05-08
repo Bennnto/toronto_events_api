@@ -45,3 +45,5 @@ venv
 # ── Project-specific ignores ──────────────────────
 toronto-opendata-festivalsandevents-jsonld-proxy/
 toronto_docs/
+staticfiles/
+celerybeat-schedule*
