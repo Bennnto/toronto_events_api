@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -228,32 +229,33 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">🏙️ Toronto Events</div>
+            <div class="logo">🏙️ Events</div>
             <div class="tagline">Join Our API Community</div>
         </div>
 
         {% if messages %}
-            {% for message in messages %}
-                {% if message.tags %}
-                    <div class="{% if 'error' in message.tags %}error-message{% else %}success-message{% endif %}">
-                        {{ message }}
-                    </div>
-                {% endif %}
-            {% endfor %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <div class="{% if 'error' in message.tags %}error-message{% else %}success-message{% endif %}">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
         {% endif %}
 
         {% if form.non_field_errors %}
-            <div class="error-list">
-                <strong>Registration Error:</strong>
-                <ul>
-                    {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="error-list">
+            <strong>Registration Error:</strong>
+            <ul>
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
 
         <form method="POST" novalidate>
@@ -262,53 +264,35 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        required 
-                        placeholder="Your username"
-                        autocomplete="username"
-                    >
+                    <input type="text" id="username" name="username" required placeholder="Your username"
+                        autocomplete="username">
                     {% if form.username.errors %}
-                        <div class="error-message" style="margin-top: 6px;">
-                            {{ form.username.errors|first }}
-                        </div>
+                    <div class="error-message" style="margin-top: 6px;">
+                        {{ form.username.errors|first }}
+                    </div>
                     {% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        required 
-                        placeholder="your@email.com"
-                        autocomplete="email"
-                    >
+                    <input type="email" id="email" name="email" required placeholder="your@email.com"
+                        autocomplete="email">
                     {% if form.email.errors %}
-                        <div class="error-message" style="margin-top: 6px;">
-                            {{ form.email.errors|first }}
-                        </div>
+                    <div class="error-message" style="margin-top: 6px;">
+                        {{ form.email.errors|first }}
+                    </div>
                     {% endif %}
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required 
-                    placeholder="Create a strong password"
-                    autocomplete="new-password"
-                >
+                <input type="password" id="password" name="password" required placeholder="Create a strong password"
+                    autocomplete="new-password">
                 {% if form.password.errors %}
-                    <div class="error-message" style="margin-top: 6px;">
-                        {{ form.password.errors|first }}
-                    </div>
+                <div class="error-message" style="margin-top: 6px;">
+                    {{ form.password.errors|first }}
+                </div>
                 {% endif %}
                 <div class="password-requirements">
                     <div class="requirement">At least 8 characters</div>
@@ -318,24 +302,18 @@
 
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input 
-                    type="password" 
-                    id="confirm_password" 
-                    name="confirm_password" 
-                    required 
-                    placeholder="Confirm your password"
-                    autocomplete="new-password"
-                >
+                <input type="password" id="confirm_password" name="confirm_password" required
+                    placeholder="Confirm your password" autocomplete="new-password">
                 {% if form.confirm_password.errors %}
-                    <div class="error-message" style="margin-top: 6px;">
-                        {{ form.confirm_password.errors|first }}
-                    </div>
+                <div class="error-message" style="margin-top: 6px;">
+                    {{ form.confirm_password.errors|first }}
+                </div>
                 {% endif %}
             </div>
 
             <div class="terms">
-                By registering, you agree to our 
-                <a href="/terms">Terms of Service</a> and 
+                By registering, you agree to our
+                <a href="/terms">Terms of Service</a> and
                 <a href="/privacy">Privacy Policy</a>
             </div>
 
@@ -347,4 +325,5 @@
         </div>
     </div>
 </body>
+
 </html>
