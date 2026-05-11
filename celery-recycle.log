@@ -1,0 +1,55 @@
+[2026-05-11 21:49:49,454: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:49:49,457: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:49:50,461: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:49:50,485: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:52:12,851: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[c94ba5df-0201-4190-ba3b-8c75b0554ee8] received
+[2026-05-11 21:56:37,286: ERROR/MainProcess] Process 'ForkPoolWorker-4' pid:34901 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:56:37,352: ERROR/MainProcess] Process 'ForkPoolWorker-3' pid:34900 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:56:37,890: ERROR/MainProcess] Process 'ForkPoolWorker-2' pid:34899 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:56:39,427: ERROR/MainProcess] Process 'ForkPoolWorker-1' pid:34898 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:56:39,451: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 15 (SIGTERM) Job: 0.')
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+    ...<2 lines>...
+    )
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/worker.py", line 203, in start
+    self.blueprint.start(self)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 365, in start
+    return self.obj.start()
+           ~~~~~~~~~~~~~~^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/consumer/consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/consumer/consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/loops.py", line 86, in asynloop
+    state.maybe_shutdown()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/state.py", line 93, in maybe_shutdown
+    raise WorkerShutdown(should_stop)
+celery.exceptions.WorkerShutdown: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+    ...<2 lines>...
+    )
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 15 (SIGTERM) Job: 0.
+"""
+[2026-05-11 21:56:39,907: WARNING/MainProcess] Sentry is attempting to send 6 pending events
+[2026-05-11 21:56:39,908: WARNING/MainProcess] Waiting up to 2 seconds
+[2026-05-11 21:56:39,908: WARNING/MainProcess] Press Ctrl-C to quit

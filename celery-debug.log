@@ -1,0 +1,98 @@
+[2026-05-11 21:49:32,998: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:49:33,000: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:49:34,004: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:49:34,012: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:50:58,612: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:50:58,613: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:50:59,620: WARNING/MainProcess] /Users/ben/40 Learning/41 Code/41.01 Python/django/events/.venv/lib/python3.14/site-packages/celery/app/control.py:56: DuplicateNodenameWarning: Received multiple replies from node name: celery@Benp.local.
+Please make sure you give each node a unique nodename using
+the celery worker `-n` option.
+  warnings.warn(DuplicateNodenameWarning(
+
+[2026-05-11 21:50:59,621: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:50:59,637: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:52:02,274: INFO/MainProcess] Task event_app.tasks.refresh_db[eced817f-6c6c-4116-ba88-1d4161d1855d] received
+[2026-05-11 21:52:02,278: WARNING/MainProcess] Fetching page 0...
+[2026-05-11 21:52:03,427: WARNING/MainProcess] Fetching page 1...
+[2026-05-11 21:52:04,446: WARNING/MainProcess] Fetching page 2...
+[2026-05-11 21:52:05,259: WARNING/MainProcess] Fetching page 3...
+[2026-05-11 21:52:06,884: WARNING/MainProcess] Fetching page 4...
+[2026-05-11 21:53:26,893: WARNING/MainProcess] ❌ API Error: ConnectTimeout: HTTPSConnectionPool(host='app.ticketmaster.com', port=443): Max retries exceeded with url: /discovery/v2/events.json?apikey=R8ldUwu1X8IjGrC1cJ3xWD9wEPL1wj6p&city=Toronto&size=200&page=4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='app.ticketmaster.com', port=443) at 0x1110265d0>, 'Connection to app.ticketmaster.com timed out. (connect timeout=20)'))
+[2026-05-11 21:53:26,894: WARNING/MainProcess] ✅ Last page reached after page 3, collected 800 events
+[2026-05-11 21:53:27,147: WARNING/MainProcess] created Niall Horan: Dinner Party Live On Tour
+[2026-05-11 21:53:27,511: WARNING/MainProcess] created SQUEEZE - TRIED, TESTED AND TRIXIES w/ Adam Ant and Haircut 100
+[2026-05-11 21:53:27,593: WARNING/MainProcess] created Toronto Marlies v Cleveland Monsters- AHL Playoffs Round 3 Home Game 1
+[2026-05-11 21:53:27,596: WARNING/MainProcess] created Toronto Marlies v Cleveland Monsters- AHL Playoffs Round 3 Home Game 2
+[2026-05-11 21:53:27,901: WARNING/MainProcess] created Basement
+[2026-05-11 21:53:27,951: WARNING/MainProcess] created The Menzingers: Everything I Ever Saw North American Tour
+[2026-05-11 21:53:28,024: WARNING/MainProcess] created Allison Russell with very special guest Elisapie
+[2026-05-11 21:53:28,068: WARNING/MainProcess] created Paris Paloma: The Fatal Flaw Tour
+[2026-05-11 21:53:28,104: WARNING/MainProcess] created LSR/CITY X GARETH EMERY
+[2026-05-11 21:53:28,109: WARNING/MainProcess] created BUNT. - In The Toronto Round
+[2026-05-11 21:53:28,112: WARNING/MainProcess] created The High Kings - Rocky Road to Dublin - 2026 Tour
+[2026-05-11 21:53:28,115: WARNING/MainProcess] created Babe Rainbow with Special Guests
+[2026-05-11 21:53:28,141: WARNING/MainProcess] created Madeon presents Victory Live
+[2026-05-11 21:53:28,193: WARNING/MainProcess] created Slow Pulp
+[2026-05-11 21:53:28,276: WARNING/MainProcess] created Cheat Codes with Special Guests
+[2026-05-11 21:53:28,279: WARNING/MainProcess] created Black Joe Lewis & the Honeybears
+[2026-05-11 21:53:28,295: WARNING/MainProcess] created anees
+[2026-05-11 21:53:28,301: WARNING/MainProcess] created Oliver Hazard
+[2026-05-11 21:53:28,328: WARNING/MainProcess] created BRENN! - AMATEUR AT BEST WORLD TOUR
+[2026-05-11 21:53:28,363: WARNING/MainProcess] created Royale Lynn
+[2026-05-11 21:53:28,374: WARNING/MainProcess] created letlive & Oxymorrons
+[2026-05-11 21:53:28,434: WARNING/MainProcess] created SATURDAY: The Official Electric Island Afterparty  | 4AM LAST CALL
+[2026-05-11 21:53:28,454: WARNING/MainProcess] created SUNDAY: The Official Electric Island Afterparty | 4AM LAST CALL
+[2026-05-11 21:53:28,459: WARNING/MainProcess] created bleood - Protagonist Tour
+[2026-05-11 21:53:28,501: WARNING/MainProcess] created Bangerz Only: 2010s Dance Party at Sneaky Dee's - May 23 2026
+[2026-05-11 21:53:28,506: WARNING/MainProcess] created Guaranteed Entry: DOMESTIC
+[2026-05-11 21:53:28,529: WARNING/MainProcess] created Amp Up. Vol. 1
+[2026-05-11 21:53:28,617: INFO/MainProcess] Task event_app.tasks.refresh_db[eced817f-6c6c-4116-ba88-1d4161d1855d] succeeded in 86.34018149999974s: {'event': 27, 'venue': 0, 'category': 0, 'error': 0}
+[2026-05-11 21:54:43,492: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:54:43,493: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:54:44,501: WARNING/MainProcess] /Users/ben/40 Learning/41 Code/41.01 Python/django/events/.venv/lib/python3.14/site-packages/celery/app/control.py:56: DuplicateNodenameWarning: Received multiple replies from node name: celery@Benp.local.
+Please make sure you give each node a unique nodename using
+the celery worker `-n` option.
+  warnings.warn(DuplicateNodenameWarning(
+
+[2026-05-11 21:54:44,502: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:54:44,512: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:56:38,643: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:56:38,645: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:56:39,650: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:56:39,656: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:59:03,995: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:59:04,000: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:59:05,006: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:59:05,016: INFO/MainProcess] worker1@Benp.local ready.
+[2026-05-11 21:59:53,253: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[bfa5ddbb-eb43-49c5-9a07-20ca854840a4] received
+[2026-05-11 22:00:31,082: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 22:00:31,084: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 22:00:32,094: INFO/MainProcess] mingle: all alone
+[2026-05-11 22:00:32,101: INFO/MainProcess] events_worker@Benp.local ready.
+[2026-05-11 22:00:33,483: WARNING/MainProcess] Remote returned status 404; will try local file if available
+[2026-05-11 22:00:33,517: WARNING/MainProcess] Loaded 1720 items from toronto_docs/all.jsonld
+[2026-05-11 22:00:36,939: WARNING/MainProcess] 
+Summary:
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   venue: 0
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   category: 0
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   event: 0
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   offer: 1016
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   skipped: 0
+[2026-05-11 22:00:36,940: WARNING/MainProcess]   errors: 0
+[2026-05-11 22:00:36,946: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[bfa5ddbb-eb43-49c5-9a07-20ca854840a4] succeeded in 43.67252820899739s: None
+[2026-05-11 22:00:36,972: WARNING/MainProcess] Celery worker_shutdown signal received: sig=None how=None exitcode=None
+[2026-05-11 22:00:37,077: WARNING/MainProcess] Sentry is attempting to send 1 pending events
+[2026-05-11 22:00:37,077: WARNING/MainProcess] Waiting up to 2 seconds
+[2026-05-11 22:00:37,077: WARNING/MainProcess] Press Ctrl-C to quit
+[2026-05-11 22:04:09,766: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[603953f0-6df4-4821-8208-e9657053b987] received
+[2026-05-11 22:04:49,891: WARNING/MainProcess] Remote returned status 404; will try local file if available
+[2026-05-11 22:04:49,926: WARNING/MainProcess] Loaded 1720 items from toronto_docs/all.jsonld
+[2026-05-11 22:04:53,490: WARNING/MainProcess] 
+Summary:
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   venue: 0
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   category: 0
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   event: 0
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   offer: 1016
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   skipped: 0
+[2026-05-11 22:04:53,490: WARNING/MainProcess]   errors: 0
+[2026-05-11 22:04:53,492: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[603953f0-6df4-4821-8208-e9657053b987] succeeded in 43.71175824999955s: None

@@ -1,0 +1,99 @@
+[2026-05-11 21:49:23,046: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2026-05-11 21:49:23,048: INFO/MainProcess] mingle: searching for neighbors
+[2026-05-11 21:49:24,053: INFO/MainProcess] mingle: all alone
+[2026-05-11 21:49:24,080: INFO/MainProcess] celery@Benp.local ready.
+[2026-05-11 21:49:24,081: INFO/MainProcess] Task event_app.tasks.refresh_db[2afe1fb4-72b9-4888-ad1c-a841c3a179a3] received
+[2026-05-11 21:49:24,082: INFO/MainProcess] Task event_app.tasks.refresh_db_from_jsonld[ab197978-59d1-40e5-aedd-f4fec8ffc0ae] received
+[2026-05-11 21:49:24,084: ERROR/MainProcess] Received unregistered task of type 'event_app.tasks.cleanup_past_events'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+https://docs.celeryq.dev/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+b'[[], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]' (77b)
+
+The full contents of the message headers:
+{'lang': 'py', 'task': 'event_app.tasks.cleanup_past_events', 'id': '8af8f01e-d259-4521-a4e1-b2f6208456e0', 'shadow': None, 'eta': None, 'expires': None, 'group': None, 'group_index': None, 'retries': 0, 'timelimit': [None, None], 'root_id': '8af8f01e-d259-4521-a4e1-b2f6208456e0', 'parent_id': None, 'argsrepr': '()', 'kwargsrepr': '{}', 'origin': 'gen34178@Benp.local', 'ignore_result': False, 'replaced_task_nesting': 0, 'stamped_headers': None, 'stamps': {}, 'sentry-task-enqueued-time': 1778536131.558785, 'sentry-trace': '6981e6a5c4ad4d0a8ce0fa77342b4d8d-a2b85483eae5d61d', 'baggage': 'sentry-trace_id=6981e6a5c4ad4d0a8ce0fa77342b4d8d,sentry-environment=production,sentry-release=598a4342eee22d86ac7bea1d0ea20ff178f04341,sentry-public_key=ea79713f6f77f96aa0c0dc0a189a1ad7,sentry-org_id=4511334993756160,sentry-sample_rate=0.1', 'headers': {'sentry-trace': '6981e6a5c4ad4d0a8ce0fa77342b4d8d-a2b85483eae5d61d', 'baggage': 'sentry-trace_id=6981e6a5c4ad4d0a8ce0fa77342b4d8d,sentry-environment=production,sentry-release=598a4342eee22d86ac7bea1d0ea20ff178f04341,sentry-public_key=ea79713f6f77f96aa0c0dc0a189a1ad7,sentry-org_id=4511334993756160,sentry-sample_rate=0.1', 'sentry-task-enqueued-time': 1778536131.558785}}
+
+The delivery info for this task is:
+{'exchange': '', 'routing_key': 'celery'}
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/consumer/consumer.py", line 668, in on_task_received
+    strategy = strategies[type_]
+               ~~~~~~~~~~^^^^^^^
+KeyError: 'event_app.tasks.cleanup_past_events'
+[2026-05-11 21:49:24,089: WARNING/ForkPoolWorker-1] Fetching page 0...
+[2026-05-11 21:49:24,246: ERROR/ForkPoolWorker-3] Task event_app.tasks.refresh_db_from_jsonld[ab197978-59d1-40e5-aedd-f4fec8ffc0ae] raised unexpected: HTTPError('404 Client Error: Not Found for url: https://raw.githubusercontent.com/TorontoOpenData/events/master/all.jsonld')
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/app/trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ~~~^^^^^^^^^^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/sentry_sdk/integrations/celery/__init__.py", line 486, in _inner
+    reraise(*exc_info)
+    ~~~~~~~^^^^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/sentry_sdk/utils.py", line 1832, in reraise
+    raise value
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/sentry_sdk/integrations/celery/__init__.py", line 481, in _inner
+    return f(*args, **kwargs)
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/app/trace.py", line 858, in __protected_call__
+    return self.run(*args, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/events/event_app/tasks.py", line 19, in refresh_db_from_jsonld
+    resp.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/requests/models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://raw.githubusercontent.com/TorontoOpenData/events/master/all.jsonld
+[2026-05-11 21:49:25,312: WARNING/ForkPoolWorker-1] Fetching page 1...
+[2026-05-11 21:49:32,825: ERROR/MainProcess] Process 'ForkPoolWorker-4' pid:34604 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:49:33,351: ERROR/MainProcess] Process 'ForkPoolWorker-3' pid:34603 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:49:33,364: ERROR/MainProcess] Process 'ForkPoolWorker-2' pid:34602 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:49:33,376: ERROR/MainProcess] Process 'ForkPoolWorker-1' pid:34601 exited with 'signal 15 (SIGTERM)'
+[2026-05-11 21:49:33,392: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: signal 15 (SIGTERM) Job: 0.')
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+    ...<2 lines>...
+    )
+billiard.einfo.ExceptionWithTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/worker.py", line 203, in start
+    self.blueprint.start(self)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 365, in start
+    return self.obj.start()
+           ~~~~~~~~~~~~~~^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/consumer/consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/consumer/consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/loops.py", line 86, in asynloop
+    state.maybe_shutdown()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/celery/worker/state.py", line 93, in maybe_shutdown
+    raise WorkerShutdown(should_stop)
+celery.exceptions.WorkerShutdown: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ben/40 Learning/41 Code/41.01 Python/django/venv/lib/python3.14/site-packages/billiard/pool.py", line 1265, in mark_as_worker_lost
+    raise WorkerLostError(
+    ...<2 lines>...
+    )
+billiard.exceptions.WorkerLostError: Worker exited prematurely: signal 15 (SIGTERM) Job: 0.
+"""

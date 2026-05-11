@@ -249,7 +249,11 @@ CELERY_BEAT_SCHEDULE = {
     "refresh-json-ld": {
         "task": "event_app.tasks.refresh_db_from_jsonld",
         "schedule": crontab(hour=0, minute=0),
-    }
+    },
+    "delete_past_event": {
+        "task": "event_app.tasks.cleanup_past_events",
+        "schedule": crontab(hour=1, minute=0)
+    },
 }
 
 import sentry_sdk

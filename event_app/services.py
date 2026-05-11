@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 # ----------------- load environment variable ---------------- #
 load_dotenv()
-TK_MT_URL = os.getenv("TK_MT_URL")
+TK_MT_URL = os.getenv("TK_MT_URL", "https://app.ticketmaster.com/discovery/v2/events.json")
 TK_MT_API_KEY = os.getenv("TK_MT_API")
 
 

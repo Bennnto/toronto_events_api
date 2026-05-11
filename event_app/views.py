@@ -24,9 +24,9 @@ def _safe_filter_parameters(filter_cls):
     except Exception:
         return []
 from .throttles import BaseThrottle, AuthThrottle, AdminThrottle
-from .models import Event
-from .serializers import EventSerializer
-from .filters import EventFilter
+from .models import Event, Venue
+from .serializers import EventSerializer, VenueSerializer
+from .filters import EventFilter, VenueFilter
 from .forms import Registry_Form, Login_Form
 from dotenv import load_dotenv
 import os
@@ -103,6 +103,26 @@ class AdminEventViewSet(viewsets.ModelViewSet):
     filter_backends= [DjangoFilterBackend, SearchFilter]
     search_fields = ['event_name', 'category__category__name', 'venue__venue_name']
 
+class VenueViewSet(viewsets.ModelViewSet):
+    queryset = Venue.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = VenueSerializer
+    filterset_class = VenueFilter
+    throttle_classes = [BaseThrottle, AuthThrottle]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    search_fields = ['venue_name', 'address']
+    pagination_class = LimitOffsetPagination
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filterset_class(request.GET, queryset=self.get_queryset())
+        if not queryset.is_valid():
+            return Response({"Error": "Couldn't retrieve information from DB"})
+        page = self.paginate_queryset(queryset.qs) 
+        serializer = self.get_serializer(page, many=True)
+        return self.get_paginated_response(serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)    
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
