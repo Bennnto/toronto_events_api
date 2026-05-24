@@ -10,6 +10,7 @@ urlpatterns = [
     path("api/v1/", include(router.urls)),
     path("api/v1/healthz/", healthz, name="healthz"),
     path("api/v1/readyz/", readyz, name="readyz"),
+    path("api/v1/event_count/", event_count, name="event_count"),
     path("login/", user_login, name="login"),
     path("register/", user_register, name="register"),
     path("logout/", user_logout, name="logout"),

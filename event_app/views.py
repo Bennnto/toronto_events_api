@@ -11,12 +11,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db import connections
 from django.core.cache import caches
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
 import time
+import os
+from dotenv import load_dotenv
 from scalar.get_filter_parameters import get_filter_parameters
 
+load_dotenv()
 
 def _safe_filter_parameters(filter_cls):
     try:
@@ -175,6 +179,19 @@ def readyz(request):
     status_code = 200 if ok else 503
     return JsonResponse({"status": "ready" if ok else "not_ready", "checks": checks}, status=status_code)
 
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+@throttle_classes([BaseThrottle, AuthThrottle])
+def event_count(request):
+    from .models import Event
+
+    try:
+        total = Event.objects.count()
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+    return JsonResponse({"total_events": total})
+
 def user_register(request):
     if request.method == "POST":
         form = Registry_Form(request.POST)
@@ -265,3 +282,18 @@ def home(request):
         'db_latency_ms': db_latency_ms,
     }
     return render(request, 'home.html', context)
+
+def reset_password(request):
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save(request=request,
+            from_email = os.getenv('EMAIL_HOST_USER'),
+            subject_template_name = 'password_reset_subject.txt',
+            email_template_name = 'password_reset_email.html',
+            )
+        messages.success(request, "Check your email for password reset confirmation")
+        return redirect('password_reset_done')
+    else:
+        form = PasswordResetForm()
+    return render(request, 'password_reset.html', {'form': form})
