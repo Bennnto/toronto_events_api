@@ -1,9 +1,10 @@
+import importlib.util
+import json
+from decimal import Decimal
+from pathlib import Path
+
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
-from decimal import Decimal
-import json
-from pathlib import Path
-import importlib.util
 
 
 class Command(BaseCommand):
@@ -16,9 +17,7 @@ class Command(BaseCommand):
             action="store_true",
             help="Actually write to DB (dry-run by default)",
         )
-        parser.add_argument(
-            "--batch-size", type=int, default=200, help="Batch size for bulk operations"
-        )
+        parser.add_argument("--batch-size", type=int, default=200, help="Batch size for bulk operations")
 
     def handle(self, *args, **options):
         path = Path(options["file"])
@@ -27,15 +26,13 @@ class Command(BaseCommand):
 
         mapper_path = Path("event_app/json-mapper.py")
         if not mapper_path.exists():
-            raise CommandError(
-                f"Mapper not found at {mapper_path} (expected event_app/json-mapper.py)"
-            )
+            raise CommandError(f"Mapper not found at {mapper_path} (expected event_app/json-mapper.py)")
 
         spec = importlib.util.spec_from_file_location("json_mapper", mapper_path)
         json_mapper = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(json_mapper)
 
-        from event_app.models import Venue, Category, Event, Offer
+        from event_app.models import Category, Event, Offer, Venue
 
         with path.open("r", encoding="utf-8") as f:
             data = json.load(f)
@@ -80,12 +77,16 @@ class Command(BaseCommand):
                                 "address": vn.get("address") or "",
                                 "city": vn.get("city") or "",
                                 "country": vn.get("country") or "",
-                                "latitude": Decimal(str(vn.get("latitude")))
-                                if vn.get("latitude") not in (None, "")
-                                else Decimal("0.0"),
-                                "longitude": Decimal(str(vn.get("longitude")))
-                                if vn.get("longitude") not in (None, "")
-                                else Decimal("0.0"),
+                                "latitude": (
+                                    Decimal(str(vn.get("latitude")))
+                                    if vn.get("latitude") not in (None, "")
+                                    else Decimal("0.0")
+                                ),
+                                "longitude": (
+                                    Decimal(str(vn.get("longitude")))
+                                    if vn.get("longitude") not in (None, "")
+                                    else Decimal("0.0")
+                                ),
                             },
                         )
                         if v_created:
@@ -144,6 +145,4 @@ class Command(BaseCommand):
             self.stdout.write(f"  {k}: {v}")
 
         if not options.get("commit"):
-            self.stdout.write(
-                "\nDry-run complete. Rerun with --commit to persist changes."
-            )
+            self.stdout.write("\nDry-run complete. Rerun with --commit to persist changes.")

@@ -1,9 +1,10 @@
-from django.test import TestCase, override_settings
-from django.contrib.auth import get_user_model
-from rest_framework.test import APIClient
 from decimal import Decimal
 
-from .models import Event, Venue, Category
+from django.contrib.auth import get_user_model
+from django.test import TestCase, override_settings
+from rest_framework.test import APIClient
+
+from .models import Category, Event, Venue
 
 # Disable throttling for all tests by using a cache backend that never stores.
 NO_THROTTLE_CACHE = {
@@ -117,9 +118,7 @@ class TokenTests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(
-            username="testuser", password="testpass123"
-        )
+        self.user = User.objects.create_user(username="testuser", password="testpass123")
 
     def test_obtain_token_valid_credentials(self):
         r = self.client.post(
@@ -146,9 +145,7 @@ class TokenTests(TestCase):
             format="json",
         )
         refresh = r.json()["refresh"]
-        r2 = self.client.post(
-            "/api/v1/token/refresh/", {"refresh": refresh}, format="json"
-        )
+        r2 = self.client.post("/api/v1/token/refresh/", {"refresh": refresh}, format="json")
         self.assertEqual(r2.status_code, 200)
         self.assertIn("access", r2.json())
 
@@ -163,9 +160,7 @@ class TokenTests(TestCase):
         self.assertEqual(r2.status_code, 200)
 
     def test_verify_token_invalid(self):
-        r = self.client.post(
-            "/api/v1/token/verify/", {"token": "not.a.real.token"}, format="json"
-        )
+        r = self.client.post("/api/v1/token/verify/", {"token": "not.a.real.token"}, format="json")
         self.assertEqual(r.status_code, 401)
 
 
@@ -297,9 +292,7 @@ class EventUpdateTests(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {r.json()['access']}")
 
     def test_patch_unauthenticated_returns_403(self):
-        r = self.client.patch(
-            f"/api/v1/admin/events/{self.event.pk}/", {"event_name": "New"}
-        )
+        r = self.client.patch(f"/api/v1/admin/events/{self.event.pk}/", {"event_name": "New"})
         self.assertIn(r.status_code, [401, 403])
 
     def test_patch_authenticated_updates_field(self):
@@ -314,9 +307,7 @@ class EventUpdateTests(TestCase):
 
     def test_patch_invalid_pk_returns_404(self):
         self._auth()
-        r = self.client.patch(
-            "/api/v1/admin/events/99999/", {"event_name": "X"}, format="json"
-        )
+        r = self.client.patch("/api/v1/admin/events/99999/", {"event_name": "X"}, format="json")
         self.assertEqual(r.status_code, 404)
 
 

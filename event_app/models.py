@@ -25,9 +25,7 @@ class Category(models.Model):
 
 
 class Offer(models.Model):
-    event = models.ForeignKey(
-        "Event", related_name="offers", on_delete=models.CASCADE, null=True
-    )
+    event = models.ForeignKey("Event", related_name="offers", on_delete=models.CASCADE, null=True)
     offer_type = models.CharField(max_length=255, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     currency = models.CharField(max_length=10, null=True, blank=True)

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Event, Venue, Category, Offer
+
+from .models import Category, Event, Offer, Venue
 
 
 @admin.register(Event)

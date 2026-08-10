@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Venue, Category, Event, Offer
+
+from .models import Category, Event, Offer, Venue
 
 
 class VenueSerializer(serializers.ModelSerializer):

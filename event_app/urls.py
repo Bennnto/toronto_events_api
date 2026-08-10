@@ -1,6 +1,8 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import EventViewSet, AdminEventViewSet, healthz, readyz, user_register, user_login, user_logout, home
+
+from .views import (AdminEventViewSet, EventViewSet, healthz, home, readyz,
+                    user_login, user_logout, user_register)
 
 router = DefaultRouter()
 router.register(r"events", EventViewSet, basename="events")
@@ -13,5 +15,5 @@ urlpatterns = [
     path("login/", user_login, name="login"),
     path("register/", user_register, name="register"),
     path("logout/", user_logout, name="logout"),
-    path("", home, name='home'),
+    path("", home, name="home"),
 ]

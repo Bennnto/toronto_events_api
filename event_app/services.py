@@ -1,9 +1,9 @@
-import requests
 import os
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
-from dotenv import load_dotenv
 
+import requests
+from dotenv import load_dotenv
 
 # ----------------- load environment variable ---------------- #
 load_dotenv()
@@ -63,9 +63,7 @@ def parse_raw_data():
             if page == 0:
                 print("⚠️ Couldn't fetch any data from API")
             else:
-                print(
-                    f"✅ Last page reached after page {page - 1}, collected {len(all_events)} events"
-                )
+                print(f"✅ Last page reached after page {page - 1}, collected {len(all_events)} events")
             break
 
         event_data = raw_data.get("_embedded", {}).get("events", [])
@@ -80,17 +78,11 @@ def parse_raw_data():
             event_url = event.get("url", "")
             outlets = event.get("outlets") or []
             sale_url = outlets[0].get("url", "") if outlets else ""
-            event_start_date = (
-                event.get("dates", {}).get("start", {}).get("dateTime") or None
-            )
+            event_start_date = event.get("dates", {}).get("start", {}).get("dateTime") or None
             event_start_date = parse_iso_datetime(event_start_date)
-            sale_start_date = (
-                event.get("sales", {}).get("public", {}).get("startDateTime") or None
-            )
+            sale_start_date = event.get("sales", {}).get("public", {}).get("startDateTime") or None
             sale_start_date = parse_iso_datetime(sale_start_date)
-            sale_end_date = (
-                event.get("sales", {}).get("public", {}).get("endDateTime") or None
-            )
+            sale_end_date = event.get("sales", {}).get("public", {}).get("endDateTime") or None
             sale_end_date = parse_iso_datetime(sale_end_date)
             # Derive sale_status from sale dates
             if sale_start_date and sale_end_date:
@@ -103,28 +95,12 @@ def parse_raw_data():
             venue = venues[0] if venues else {}
             venue_type = venue.get("type", "venue")
             venue_name = venue.get("name", "Unknown")
-            address = (
-                venue.get("address", {}).get("line1", "")
-                if venue.get("address")
-                else ""
-            )
-            city = (
-                venue.get("city", {}).get("name", "Unknown")
-                if venue.get("city")
-                else "Unknown"
-            )
-            country = (
-                venue.get("country", {}).get("name", "Unknown")
-                if venue.get("country")
-                else "Unknown"
-            )
+            address = venue.get("address", {}).get("line1", "") if venue.get("address") else ""
+            city = venue.get("city", {}).get("name", "Unknown") if venue.get("city") else "Unknown"
+            country = venue.get("country", {}).get("name", "Unknown") if venue.get("country") else "Unknown"
             latitude = venue.get("location", {}).get("latitude", "0")
             longitude = venue.get("location", {}).get("longitude", "0")
-            seatmap = (
-                venue.get("seatmap", {}).get("staticUrl", "")
-                if venue.get("seatmap")
-                else ""
-            )
+            seatmap = venue.get("seatmap", {}).get("staticUrl", "") if venue.get("seatmap") else ""
 
             classifications = event.get("classifications") or []
             category = classifications[0] if classifications else {}
@@ -175,7 +151,7 @@ def sync_db():
 
     synced = {"event": 0, "venue": 0, "category": 0, "error": 0}
 
-    from .models import Venue, Category, Event, Offer
+    from .models import Category, Event, Offer, Venue
 
     for data in parsed_data:
 

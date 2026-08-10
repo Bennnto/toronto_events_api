@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from pathlib import Path
-from datetime import timedelta
-from dotenv import load_dotenv
 import os
+import sys
+from datetime import timedelta
+from pathlib import Path
+
+import sentry_sdk
+from celery.schedules import crontab
+from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +36,6 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
-import sys
 TESTING = "test" in sys.argv
 
 # Dev-safe security flags — set these to True only in production behind HTTPS
@@ -223,9 +227,9 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
-        "OPTIONS" : {
+        "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+        },
     }
 }
 
@@ -239,8 +243,6 @@ CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-from celery.schedules import crontab
-
 CELERY_BEAT_SCHEDULE = {
     "refresh-database-daily": {
         "task": "event_app.tasks.refresh_db",
@@ -249,11 +251,8 @@ CELERY_BEAT_SCHEDULE = {
     "refresh-json-ld": {
         "task": "event_app.tasks.refresh_db_from_jsonld",
         "schedule": crontab(hour=0, minute=0),
-    }
+    },
 }
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN", ""),
@@ -263,10 +262,10 @@ sentry_sdk.init(
     environment=os.getenv("ENVIRONMENT", "development"),
 )
 
-#Email Configuration 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# Email Configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")

@@ -1,5 +1,5 @@
-from hashlib import sha1
 from datetime import datetime, timezone
+from hashlib import sha1
 
 
 def _to_dt(value):
@@ -19,7 +19,7 @@ def _safe(d, *path, default=None):
 
 def build_ext_id(item: dict) -> str:
     base = f"{item.get('url', '')}|{item.get('startDate', '')}|{item.get('name', '')}"
-    return sha1(base.encode("utf-8")).hexdigest()
+    return sha1(base.encode("utf-8"), usedforsecurity=False).hexdigest()
 
 
 def _first_offer(item: dict) -> dict:
